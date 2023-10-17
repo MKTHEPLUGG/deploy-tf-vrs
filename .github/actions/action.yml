@@ -1,0 +1,27 @@
+name: "Terraform Deploy to Azure"
+description: "Deploy infrastructure to Azure using Terraform"
+runs:
+  using: "docker"
+  image: "Dockerfile"
+inputs:
+  storage_account_name:
+    description: "Azure Storage Account Name for Terraform State"
+    required: true
+  container_name:
+    description: "Azure Blob Container Name for Terraform State"
+    required: true
+  key:
+    description: "Key for Terraform State in Azure Blob"
+    required: true
+  resource_group_name:
+    description: "Azure Resource Group Name for Storage Account"
+    required: true
+  client_id:
+    description: "Azure Client ID for Service Principal"
+    required: true
+  client_secret:
+    description: "Azure Client Secret for Service Principal"
+    required: true
+  tenant_id:
+    description: "Azure Tenant ID for Service Principal"
+    required: true
