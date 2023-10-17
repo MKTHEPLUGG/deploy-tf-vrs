@@ -12,3 +12,5 @@ terraform init \
 
 # Validate, Plan, and Apply
 terraform validate && terraform plan && terraform apply -auto-approve
+
+
