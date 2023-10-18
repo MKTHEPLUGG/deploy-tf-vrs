@@ -22,7 +22,7 @@ inputs:
   tenant_id:
     description: "Azure Tenant ID for Service Principal"
     required: true
-  working-directory:
+  working_directory:
     description: "Working directory for Terraform files"
     required: false
     default: "."
