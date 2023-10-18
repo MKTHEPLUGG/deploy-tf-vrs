@@ -43,7 +43,7 @@ runs:
             -backend-config="resource_group_name=${{ inputs.resource_group_name }}" \
             -backend-config="client_id=${{ inputs.client_id }}" \
             -backend-config="client_secret=${{ inputs.client_secret }}" \
-            -backend-config="tenant_id=${{ inputs.tenant_id }}"
+            -backend-config="tenant_id=${{ inputs.tenant_id }}" \
             -backend-config="subscription_id=${{ inputs.subscription_id }}"
         terraform validate && terraform plan && terraform apply -auto-approve
       shell: bash
