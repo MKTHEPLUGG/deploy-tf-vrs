@@ -1,7 +1,3 @@
-Certainly! Here's a draft of the documentation for your `deploy-tf-vrs` GitHub Action:
-
----
-
 # Terraform Deploy to Azure (via Remote State) Action
 
 This GitHub Action allows you to deploy infrastructure to Azure using Terraform, leveraging Azure Blob Storage for remote state management.
