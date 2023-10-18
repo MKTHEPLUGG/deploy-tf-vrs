@@ -30,6 +30,7 @@ runs:
   using: "composite"
   steps:
     - run: |
+        echo "Working directory input: ${{ inputs.working_directory }}"
         echo "Current directory: $(pwd)"
         cd ${{ inputs.working_directory }}
         echo "Current directory: $(pwd)"
