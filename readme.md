@@ -108,7 +108,44 @@ By using this approach, we achieve the following:
 
 ```YAML
 
+name: 'Use Terraform Action'
+on:
+  push:
+    branches:
+      - master
 
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
+
+    - name: Terraform Deploy to Azure
+      uses: MKTHEPLUGG/deploy-tf-vrs@v1
+      # these vars are for azurerm providor to auth with azure via SP to deploy
+      env:
+        TF_VAR_client_id: ${{ secrets.AZURE_CLIENT_ID }}
+        TF_VAR_client_secret: ${{ secrets.AZURE_CLIENT_SECRET }}
+        TF_VAR_tenant_id: ${{ secrets.AZURE_TENANT_ID }}
+        TF_VAR_subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      with:
+        # these vars are for the storage account authentication with SP
+        storage_account_name: 'tfstatestore12345'
+        container_name: tfstatecontainer
+        key: 'terraform.tfstate'
+        resource_group_name: TerraformStateRG
+        client_id: ${{ secrets.AZURE_CLIENT_ID }}
+        client_secret: ${{ secrets.AZURE_CLIENT_SECRET }}
+        tenant_id: ${{ secrets.AZURE_TENANT_ID }}
+        subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        working_directory: './vnet'
+        # specify working directory to choose where you want to deploy from
 
 
 ```
