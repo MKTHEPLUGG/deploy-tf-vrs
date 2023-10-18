@@ -1,8 +1,5 @@
 name: "Terraform Deploy to Azure"
 description: "Deploy infrastructure to Azure using Terraform"
-runs:
-  using: "docker"
-  image: "Dockerfile"
 inputs:
   storage_account_name:
     description: "Azure Storage Account Name for Terraform State"
@@ -25,3 +22,23 @@ inputs:
   tenant_id:
     description: "Azure Tenant ID for Service Principal"
     required: true
+  working-directory:
+    description: "Working directory for Terraform files"
+    required: false
+    default: "."
+runs:
+  using: "composite"
+  steps:
+    - run: |
+        terraform init \
+            -backend-config="storage_account_name=${{ inputs.storage_account_name }}" \
+            -backend-config="container_name=${{ inputs.container_name }}" \
+            -backend-config="key=${{ inputs.key }}" \
+            -backend-config="resource_group_name=${{ inputs.resource_group_name }}" \
+            -backend-config="client_id=${{ inputs.client_id }}" \
+            -backend-config="client_secret=${{ inputs.client_secret }}" \
+            -backend-config="tenant_id=${{ inputs.tenant_id }}"
+        terraform validate && terraform plan && terraform apply -auto-approve
+      shell: bash
+      working-directory: ${{ inputs.working_directory }}
+
