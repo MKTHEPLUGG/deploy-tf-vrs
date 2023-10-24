@@ -1,0 +1,23 @@
+name: GitVersion Tag
+
+permissions:
+  id-token: write
+  contents: write
+
+on:
+  push:
+    branches: [ "master" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Step
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - name: Tag the repo
+      uses: MKTHEPLUGG/gitversion-tag-action@v1
+      with:
+        configFilePath: gitversion.yml
