@@ -37,6 +37,7 @@ runs:
         # echo "Working directory input: ${{ inputs.working_directory }}"
         # echo "Current directory: $(pwd)"
         # echo "Subscription ID: ${{ inputs.subscription_id }}"
+          echo "Client_ID: ${{ inputs.client_id }}"
         # ls -al
         terraform init \
             -backend-config="storage_account_name=${{ inputs.storage_account_name }}" \
