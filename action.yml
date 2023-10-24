@@ -47,6 +47,7 @@ runs:
             -backend-config="client_secret=${{ inputs.client_secret }}" \
             -backend-config="tenant_id=${{ inputs.tenant_id }}" \
             -backend-config="subscription_id=${{ inputs.subscription_id }}"
+        terraform import module.keyvault.azurerm_resource_group.SymbolicRG /subscriptions/${{ inputs.subscription_id }}/resourceGroups/test-tf-2
         terraform validate && terraform plan && terraform apply -auto-approve
       shell: bash
       working-directory: ${{ inputs.working_directory }}
